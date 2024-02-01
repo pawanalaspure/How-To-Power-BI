@@ -1,0 +1,48 @@
+SELECT
+NON EMPTY(
+{
+	[Measures].[Top of Mind % (weighted)],
+	[Measures].[Spontaneous Awareness % (weighted)],
+	[Measures].[Top2Box Meets Needs],
+	[Measures].[Top2Box Affinity (Brand Love)],
+	[Measures].[Top2Box Unique],
+	[Measures].[Top2Box Sets Trends],
+	[Measures].[Top2Box Consideration],
+	[Measures].[Tried % (weighted)]
+}
+	) ON COLUMNS,
+
+NON EMPTY
+(	[2 Geography].[OU].&[Africa OU],
+	[2 Geography].[Country].children,
+	[4 Product].[Global Category].&[Coca-Cola],
+	[4 Product].[Manufacturer].[Manufacturer].Members,
+	[3 Time Period].[Month_Name].children
+
+	) ON ROWS
+
+FROM
+[Model]
+
+where 
+(
+	[3 Time Period].[Period_Type].&[6MMT],
+	
+{	[4 Product].[Brand].&[Diet Coke with Splenda],
+	[4 Product].[Brand].&[Coca-Cola Zero/ No Sugar],
+	[4 Product].[Brand].&[Diet Coke / Coca-Cola Light],
+	[4 Product].[Brand].&[Coca-Cola Zero/ No Sugar Peach],
+	[4 Product].[Brand].&[Coca-Cola Zero Sugar Caffeine Free],
+	[4 Product].[Brand].&[Coca-Cola No Sugar/Zero Plus Coffee],
+	
+	[4 Product].[Brand].&[Pepsi Zero],
+	[4 Product].[Brand].&[Pepsi Black],
+	[4 Product].[Brand].&[Pepsi Zero Lime],
+	[4 Product].[Brand].&[Diet/Light Pepsi],
+	[4 Product].[Brand].&[Pepsi Black Raspberry],
+	[4 Product].[Brand].&[Diet Pepsi Wild Cherry],
+	[4 Product].[Brand].&[Pepsi Max Zero Caffeine],
+	[4 Product].[Brand].&[Pepsi Max/ Zero/ No Sugar]
+}	
+
+)
